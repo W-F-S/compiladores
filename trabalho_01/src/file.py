@@ -1,4 +1,11 @@
 # Open a file and read its contents
+import re
+
+
+#o que deveria ser considerado isso?
+#   abc"teste"
+#texto ou identificador
+
 
 palavras_chave = {
      'if': 'palavra-chave',
@@ -24,8 +31,52 @@ palavras_chave = {
 
 
 }
+
+itens ={
+}
+
+def get_tipo(item):
+    resposta = palavras_chave.get(item)
+
+    if resposta == None:
+        if bool(re.match(r'^-?\d+(\.\d+)?$', item)):
+            resposta = "numero"
+
+        elif bool(re.match(r'^\".*\"$', item)):
+            resposta = "texto"
+
+        elif bool(re.match(r'^[a-zA-Z0-9]+$', item)):
+            resposta = "identificador"
+        else:
+            resposta = "texto"
+
+    return resposta
+
 """ tecnincamente não leio o ; ';':'',"""
 
+
+
+"""def read_file(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            content = file.read()
+
+
+            print("File Contents:")
+
+            content = content.split('\n');
+
+            for line in content:
+                teste = line.split("//")[0].replace(';', ' ')
+
+                teste2 = (teste.split(' '))
+
+                print(teste2)
+
+
+                for teste3 in teste2:
+                    print(teste3)
+                    itens[teste3] = get_tipo(teste3)"""
 
 
 def read_file(file_path):
@@ -38,33 +89,37 @@ def read_file(file_path):
 
             content = content.split('\n');
 
-
-
-
-
-
-
             for line in content:
-                teste = line.split("//")[0].replace(';', ' ')
+                token = ''
+                if "//" in line:
+                    line = line.split("//")[0]
 
-                teste2 = (teste.split(' '))
+                final_condition = ' ;(){}'
+                for char in line:
 
-                print(teste2)
+                    if char in final_condition:
+                        final_condition = ' ;(){}'
+                        print(token)
+                        itens[token] = get_tipo(token)
+                        token = ''
+                        continue
 
+                    elif char == "\"": #nova condicao de parada
+                        final_condition = '\"'
+                        continue
 
-                for teste3 in teste2:
-                    resposta = palavras_chave.get(teste3)
-                    if resposta != None:
-                        print(resposta)
                     else:
-                        print("nao tem: " + teste3)
+                        token += char
 
 
+
+
+        print(itens)
     except FileNotFoundError:
         print("Error: File not found.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
 # Example usage
-file_path = "teste.txt"  # Replace with your file path
+file_path = "teste3.txt"  # Replace with your file path
 read_file(file_path)
