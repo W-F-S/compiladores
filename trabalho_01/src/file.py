@@ -1,11 +1,12 @@
-# Open a file and read its contents
-import re
+import re #para regex
 
 
 #o que deveria ser considerado isso?
 #   abc"teste"
 #texto ou identificador
 
+
+#se inserir um caractere que nao existe, por exemplo, um @, o sistema tem que falar que ele é um caractere inválido
 
 palavras_chave = {
      'if': 'palavra-chave',
@@ -56,7 +57,10 @@ def get_tipo(item):
 
 
 
-"""def read_file(file_path):
+"""
+modo de leitura antigo
+
+def read_file(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.read()
@@ -83,8 +87,6 @@ def read_file(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.read()
-
-
             print("File Contents:")
 
             content = content.split('\n');
@@ -111,8 +113,7 @@ def read_file(file_path):
                     else:
                         token += char
 
-
-
+        print("----------------------------------------------------------------------------------------")
 
         print(itens)
     except FileNotFoundError:
@@ -120,6 +121,6 @@ def read_file(file_path):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-# Example usage
-file_path = "teste3.txt"  # Replace with your file path
+
+file_path = "teste3.txt"
 read_file(file_path)
