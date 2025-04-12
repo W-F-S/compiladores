@@ -48,6 +48,10 @@ def get_tipo(item):
 
         elif bool(re.match(r'^[a-zA-Z0-9]+$', item)):
             resposta = "identificador"
+
+        elif bool(re.match(r'^[^a-zA-Z0-9]+$', item)):
+            resposta = "invalido"
+
         else:
             resposta = "texto"
 
@@ -87,7 +91,7 @@ def read_file(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.read()
-            print("File Contents:")
+            print("Lido:")
 
             content = content.split('\n');
 
@@ -114,6 +118,9 @@ def read_file(file_path):
                         token += char
 
         print("----------------------------------------------------------------------------------------")
+
+        print("Itens:")
+
 
         print(itens)
     except FileNotFoundError:
