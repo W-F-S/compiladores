@@ -87,7 +87,7 @@ public class AnalisadorLexico {
                 case '/': tokens.add(new Token(TipoToken.DIVIDE)); break;
                 case '(': tokens.add(new Token(TipoToken.ABRE_PARENTESES)); break;
                 case ')': tokens.add(new Token(TipoToken.FECHA_PARENTESES)); break;
-                case '=': tokens.add(new Token(TipoToken.ATRIBUICAO)); break;
+                case '=': tokens.add(new Token(TipoToken.DECLARACAO)); break;
                 case ';': tokens.add(new Token(TipoToken.PONTO_VIRGULA)); break;
 
                 default: throw new RuntimeException("Caractere inválido: " + caractereAtual);

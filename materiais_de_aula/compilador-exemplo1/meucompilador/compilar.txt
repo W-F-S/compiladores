@@ -1,1 +1,5 @@
+compilar
+executar
+
 javac -d bin meucompilador/*.java
+java -cp bin meucompilador.CompiladorSimples
