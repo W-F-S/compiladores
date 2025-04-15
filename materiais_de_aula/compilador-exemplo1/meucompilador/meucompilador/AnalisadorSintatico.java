@@ -133,7 +133,6 @@ public class AnalisadorSintatico {
             } else if (tokenAtual.tipo == TipoToken.IDENTIFICADOR){
                 System.out.println("Token IDENTIFICADOR encontrado. Decidindo ação para identificador...");
 
-                //comandos.add(noExpressao);
             } else {
                 System.out.println("Tratando o token como expressão. Chamando método expressao()...");
                 //No noExpressao = expressao();
