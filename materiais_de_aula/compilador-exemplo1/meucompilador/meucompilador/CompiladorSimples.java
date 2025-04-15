@@ -4,7 +4,7 @@ import java.util.List;
 
 public class CompiladorSimples {
     public static void main(String[] args) {
-        String entrada = "int i = 30;";
+        String entrada = "int i = i + 1 30;";
         System.out.println("Expressão de entrada: " + entrada);
 
         AnalisadorLexico lexer = new AnalisadorLexico(entrada);

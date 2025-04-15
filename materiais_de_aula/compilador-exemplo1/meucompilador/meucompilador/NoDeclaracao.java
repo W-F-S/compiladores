@@ -1,8 +1,8 @@
 package meucompilador;
 
 public class NoDeclaracao extends No {
-    public Token tipo;            // Exemplo: token "int"
-    public Token identificador;   // Nome da variável, ex: token "i"
+    public Token tipo;            // esperando INTEIRO
+    public Token identificador;   // Nome da variável
     public No expressao;          // Nó que representa a expressão atribuída (ex: NoNumero, NoOperadorBinario, etc.)
 
     public NoDeclaracao(Token tipo, Token identificador, No expressao) {

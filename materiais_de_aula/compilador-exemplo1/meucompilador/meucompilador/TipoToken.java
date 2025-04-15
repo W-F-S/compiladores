@@ -8,7 +8,7 @@ public enum TipoToken {
     DIVIDE,
     ABRE_PARENTESES,
     FECHA_PARENTESES,
-    ATRIBUICAO,
+    DECLARACAO,
     PONTO_VIRGULA,
     IDENTIFICADOR,
     EOF

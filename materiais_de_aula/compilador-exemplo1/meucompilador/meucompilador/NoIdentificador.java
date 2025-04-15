@@ -1,12 +1,15 @@
 package meucompilador;
 
 public class NoIdentificador extends No {
-    public No tipo;
+    public Token tipo;
     public Token identificador;
+    public No expressao;
 
-    public NoIdentificador(No tipo, Token identificador) {
+    public NoIdentificador(Token tipo, Token identificador, No expressao) {
         this.tipo = tipo;
         this.identifiador = identificador;
+        this.expressao = expressao;
+
     }
 
     @Override

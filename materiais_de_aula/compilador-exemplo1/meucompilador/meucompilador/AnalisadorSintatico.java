@@ -7,6 +7,7 @@ public class AnalisadorSintatico {
     private List<Token> tokens;
     private int posicao;
     private Token tokenAtual;
+    private List<No> comandos;
 
     public AnalisadorSintatico(List<Token> tokens) {
         this.tokens = tokens;
@@ -20,6 +21,7 @@ public class AnalisadorSintatico {
         tokenAtual = (posicao < tokens.size()) ? tokens.get(posicao) : null;
     }
 
+    /*
     private No fator() {
         Token token = tokenAtual;
         if (token.tipo == TipoToken.INTEIRO) {
@@ -33,33 +35,36 @@ public class AnalisadorSintatico {
             }
             avancar();
             return no;
-        }else if(token.tipo == TipoToken.ATRIBUICAO){
+        }else if(token.tipo == TipoToken.IDENTIFICADOR){
+            boolean encontrado = false;
+            for (No no : comandos) {  // 'tokens' é a lista de tokens armazenada no seu analisador sintático
+                System.out.println(no);
+            }
+            if (!encontrado) {
+                throw new RuntimeException("Identificador não declarado: " + token.valor);
+            }
+            avancar();
+                public NoIdentificador(No tipo, Token identificador) {
 
+            return new NoIdentificador(, token);
         }
-
         throw new RuntimeException("Erro de sintaxe");
     }
 
-    private No termo() {
-        No no = fator();
-        while (tokenAtual.tipo == TipoToken.MULTIPLICA || tokenAtual.tipo == TipoToken.DIVIDE) {
-            Token operador = tokenAtual;
-            avancar();
-            no = new NoOperadorBinario(no, operador, fator());
-        }
-        return no;
-    }
+    */
 
     private No expressao() {
-        No no = termo();
-        while (tokenAtual.tipo == TipoToken.MAIS || tokenAtual.tipo == TipoToken.MENOS) {
+        No no;
+        while (tokenAtual.tipo == TipoToken.MAIS || tokenAtual.tipo == TipoToken.MENOS || tokenAtual.tipo == TipoToken.MULTIPLICA || tokenAtual.tipo == TipoToken.DIVIDE) {
             Token operador = tokenAtual;
             avancar();
             no = new NoOperadorBinario(no, operador, termo());
         }
         return no;
+
     }
 
+    /*
     private No identificador(){
         No no = termo();
         while (tokenAtual.tipo == TipoToken.IDENTIFICADOR) {
@@ -69,50 +74,49 @@ public class AnalisadorSintatico {
         }
         return no;
     }
+    */
 
     private No declaracao() {
-
-        No no = termo();
-        while (tokenAtual.tipo == TipoToken.MAIS || tokenAtual.tipo == TipoToken.MENOS) {
-            Token operador = tokenAtual;
+        // Verifica se o token atual é o tipo (ex: "int")
+        Token tipoToken;
+        if (tokenAtual.tipo == TipoToken.INTEIRO) {
+            tipoToken = tokenAtual;
             avancar();
-            no = new NoOperadorBinario(no, operador, termo());
+        } else {
+            throw new RuntimeException("Esperado o tipo 'int'. Encontrado: " + tokenAtual);
         }
-        return no;
-        /**
-        // Consome o token de tipo (ex: "int")
-        Token tipoToken = consumir(TipoToken.INTEIRO, "Esperado o tipo 'int'");
-        // Consome o token do identificador
-        Token idToken = consumir(TipoToken.IDENTIFICADOR, "Esperado identificador após o tipo");
-        // Consome o operador de atribuição '='
-        consumir(TipoToken.ATRIBUICAO, "Esperado '=' após o identificador");
-        // Lê a expressão (por exemplo, um número ou uma operação)
+
+        // Verifica se o próximo token é um identificador
+        Token tokenVariavel;
+        if (tokenAtual.tipo == TipoToken.IDENTIFICADOR) {
+            tokenVariavel = tokenAtual;
+            avancar();
+        } else {
+            throw new RuntimeException("Esperado identificador após o tipo. Encontrado: " + tokenAtual);
+        }
+
+        // Verifica se o próximo token é '=' (atribuição)
+        if (tokenAtual.tipo == TipoToken.DECLARACAO) { // ou TipoToken.ATRIBUICAO, se for o nome correto
+            avancar();
+        } else {
+            throw new RuntimeException("Esperado '=' após o identificador. Encontrado: " + tokenAtual);
+        }
+
+        // Lê a expressão após o '='
         No expressao = expressao();
-        // Consome o ponto e vírgula ';'
-        consumir(TipoToken.PONTO_VIRGULA, "Esperado ';' ao final da declaração");
 
-        return new NoDeclaracao(tipoToken, idToken, expressao);
-        */
-    }
-
-
-        // Dentro da classe AnalisadorSintatico
-    private Token consumir(TipoToken tipoEsperado, String mensagemErro) {
-        if (tokenAtual.tipo == tipoEsperado) {
-            Token token = tokenAtual;
+        // Verifica se há ponto e vírgula
+        if (tokenAtual.tipo == TipoToken.PONTO_VIRGULA) {
             avancar();
-            return token;
+        } else {
+            throw new RuntimeException("Esperado ';' ao final da declaração. Encontrado: " + tokenAtual);
         }
-        throw new RuntimeException(mensagemErro + ". Encontrado: " + tokenAtual);
-    }
 
-
-    public No analisar() {
-        return expressao();
+        return new NoIdentificador(tipoToken, tokenVariavel, expressao);
     }
 
     public NoPrograma programa() {
-        List<No> comandos = new ArrayList<>();
+        comandos = new ArrayList<>();
 
         System.out.println("Iniciando análise do programa...");
 
@@ -120,24 +124,21 @@ public class AnalisadorSintatico {
         while (tokenAtual != null && tokenAtual.tipo != TipoToken.EOF) {
             System.out.println("Token atual: " + tokenAtual);
 
-            // Decide qual comando ler com base no token atual
-            if (tokenAtual.tipo == TipoToken.ATRIBUICAO) {
-                System.out.println("Token ATRIBUICAO encontrado. Chamando método declaracao()...");
+            // MUDAR PARA DEFINICAO E NAO DECLARACAO
+            if (tokenAtual.tipo == TipoToken.DECLARACAO) {
+                System.out.println("Token DECLARACAO encontrado. Chamando método declaracao()...");
                 No noDeclaracao = declaracao();
                 System.out.println("Declaração processada: " + noDeclaracao);
                 comandos.add(noDeclaracao);
-            } else if (tokenAtual.tipo == TipoToken.IDENTIFICADOR{
+            } else if (tokenAtual.tipo == TipoToken.IDENTIFICADOR){
                 System.out.println("Token IDENTIFICADOR encontrado. Decidindo ação para identificador...");
-                // Aqui, conforme o design da sua linguagem, você pode tratar o IDENTIFICADOR
-                // como parte de uma expressão ou de outra construção; por enquanto, vamos tratá-lo como expressão.
-                No noExpressao = expressao();
-                System.out.println("Expressão processada: " + noExpressao);
-                comandos.add(noExpressao);
+
+                //comandos.add(noExpressao);
             } else {
                 System.out.println("Tratando o token como expressão. Chamando método expressao()...");
-                No noExpressao = expressao();
-                System.out.println("Expressão processada: " + noExpressao);
-                comandos.add(noExpressao);
+                //No noExpressao = expressao();
+                //System.out.println("Expressão processada: " + noExpressao);
+                //comandos.add(noExpressao);
                 // Opcional: se houver um PONTO_VIRGULA, você pode consumi-lo aqui
             }
         }
