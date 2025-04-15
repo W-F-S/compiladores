@@ -9,13 +9,14 @@ public class CompiladorSimples {
 
         AnalisadorLexico lexer = new AnalisadorLexico(entrada);
         List<Token> tokens = lexer.obterTokens();
-        System.out.println(tokens);
+        //System.out.println(tokens);
 
+
+
+        AnalisadorSintatico parser = new AnalisadorSintatico(tokens);
+        No ast = parser.programa();
 
         /**
-        AnalisadorSintatico parser = new AnalisadorSintatico(tokens);
-        No ast = parser.analisar();
-
         GeradorCodigo gerador = new GeradorCodigo();
         gerador.gerar(ast);
         List<String> codigo = gerador.getInstrucoes();
