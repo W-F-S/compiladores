@@ -1,0 +1,15 @@
+alker@ambulare:~/Documents/puc-docs/compiladores/trabalho_05 $ java -cp bin CompiladorCalcVar.CompiladorCalcVar
+Expressão de entrada: int i = 1 + 30;
+[INTEIRO:int, IDENTIFICADOR:i, DECLARACAO, INTEIRO:1, MAIS, INTEIRO:30, PONTO_VIRGULA, EOF]
+Token atual: INTEIRO:int
+Tratando o token como expressão. Chamando método expressao()...
+INTEIRO:int
+Token atual: IDENTIFICADOR:i
+Token IDENTIFICADOR encontrado. Decidindo ação para identificador...
+IDENTIFICADOR:i
+Token atual: DECLARACAO
+Token DECLARACAO encontrado. Chamando método declaracao()...
+Exception in thread "main" java.lang.RuntimeException: Esperado o tipo 'int'. Encontrado: DECLARACAO
+        at CompiladorCalcVar.AnalisadorSintatico.declaracao(AnalisadorSintatico.java:69)
+        at CompiladorCalcVar.AnalisadorSintatico.programa(AnalisadorSintatico.java:109)
+        at CompiladorCalcVar.CompiladorCalcVar.main(CompiladorCalcVar.java:17)

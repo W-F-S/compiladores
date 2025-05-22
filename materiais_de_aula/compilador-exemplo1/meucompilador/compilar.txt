@@ -1,5 +1,5 @@
 compilar
 executar
 
-javac -d bin meucompilador/*.java
-java -cp bin meucompilador.CompiladorSimples
+javac -d bin CompiladorCalcVar/*.java
+java -cp bin CompiladorCalcVar.CompiladorCalcVar
