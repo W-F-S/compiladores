@@ -1,0 +1,127 @@
+Crie sua própria linguagem de programação usando a biblioteca python Ply.
+
+Ela deve suportar:
+
+Tipos de dados: números (inteiros e de ponto flutuante) e texto (strings)
+Expressões (aritméticas, relacionais e lógicas)
+Variáveis
+Estruturas condicionais
+Estruturas de Repetição
+Entrada/Saída básica em console
+Funções
+
+    Implemente o compilador para a sua linguagem.
+
+Ele deve gerar código assembly executável (NASM ou MIPS) ou funcionar como interpretador, executando as instruções do programa.
+
+
+
+
+
+/home/walker/Documents/puc-docs/compiladores/trabalho_05_final/
+
+pylang/parser.py:27: Symbol 'expression' used, but not defined as a token or a rule
+pylang/parser.py:29: Symbol 'conditional' used, but not defined as a token or a rule
+pylang/parser.py:32: Symbol 'return_statement' used, but not defined as a token or a rule
+pylang/parser.py:33: Symbol 'print_statement' used, but not defined as a token or a rule
+pylang/parser.py:34: Symbol 'input_statement' used, but not defined as a token or a rule
+pylang/parser.py:41: Symbol 'expression' used, but not defined as a token or a rule
+pylang/parser.py:45: Symbol 'expression' used, but not defined as a token or a rule
+pylang/parser.py:46: Symbol 'expression' used, but not defined as a token or a rule
+pylang/parser.py:58: Symbol 'empty' used, but not defined as a token or a rule
+WARNING: Token 'AND' defined, but not used
+WARNING: Token 'DIVIDE' defined, but not used
+WARNING: Token 'ELSE' defined, but not used
+WARNING: Token 'EQ' defined, but not used
+WARNING: Token 'FALSE' defined, but not used
+WARNING: Token 'GE' defined, but not used
+WARNING: Token 'GT' defined, but not used
+WARNING: Token 'IF' defined, but not used
+WARNING: Token 'INPUT' defined, but not used
+WARNING: Token 'LE' defined, but not used
+WARNING: Token 'LT' defined, but not used
+WARNING: Token 'MINUS' defined, but not used
+WARNING: Token 'MODULO' defined, but not used
+WARNING: Token 'NEQ' defined, but not used
+WARNING: Token 'NOT' defined, but not used
+WARNING: Token 'NUMBER' defined, but not used
+WARNING: Token 'OR' defined, but not used
+WARNING: Token 'PLUS' defined, but not used
+WARNING: Token 'PRINT' defined, but not used
+WARNING: Token 'RETURN' defined, but not used
+WARNING: Token 'STRING' defined, but not used
+WARNING: Token 'TIMES' defined, but not used
+WARNING: Token 'TRUE' defined, but not used
+WARNING: There are 23 unused tokens
+ERROR: Infinite recursion detected for symbol 'program'
+ERROR: Infinite recursion detected for symbol 'statements'
+ERROR: Infinite recursion detected for symbol 'statement'
+ERROR: Infinite recursion detected for symbol 'assignment'
+ERROR: Infinite recursion detected for symbol 'loop'
+ERROR: Infinite recursion detected for symbol 'function_declaration'
+ERROR: Infinite recursion detected for symbol 'block'
+Traceback (most recent call last):
+  File "<frozen runpy>", line 189, in _run_module_as_main
+  File "<frozen runpy>", line 148, in _get_module_details
+  File "<frozen runpy>", line 112, in _get_module_details
+  File "pylang/__init__.py", line 2, in <module>
+    from .parser import parser
+  File "pylang/parser.py", line 79, in <module>
+    parser = yacc.yacc()
+  File "/venv/lib/python3.13/site-packages/ply/yacc.py", line 3432, in yacc
+    raise YaccError('Unable to build parser')
+ply.yacc.YaccError: Unable to build parser
+
+
+
+
+
+
+
+
+
+
+escreva(2 + 3 * 4);  # Saída esperada: 14
+
+Exemplo 2 (Variáveis e Atribuição):
+pylang
+
+a = 5;
+b = 10;
+escreva(a + b);  # Saída esperada: 15
+
+Exemplo 3 (Condicional Simples):
+pylang
+
+x = 7;
+se (x > 5) {
+    escreva("x é maior que 5");  # Saída esperada: x é maior que 5
+}
+--------------------------------------------------------------
+Exemplo 4 (Loop Básico):
+pylang
+
+contador = 0;
+enquanto (contador < 3) {
+    escreva(contador);
+    contador = contador + 1;
+}
+# Saída esperada:
+# 0
+# 1
+# 2
+
+Exemplo 5 (Função Simples):
+pylang
+
+funcao saudacao() {
+    escreva("Olá, mundo!");
+}
+
+saudacao();  # Saída esperada: Olá, mundo!
+
+Exemplo 6 (Entrada e Saída):
+pylang
+
+nome = leia("Digite seu nome: ");
+escreva("Bem-vindo, " + nome + "!");

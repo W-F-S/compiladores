@@ -1,0 +1,4 @@
+x = 7;
+se (x > 5) {
+    escreva("x é maior");
+}

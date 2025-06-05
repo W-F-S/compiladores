@@ -1,0 +1,4 @@
+python -m pylang teste01.pylang
+
+
+ply deve estar instalado

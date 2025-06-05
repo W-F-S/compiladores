@@ -1,0 +1,5 @@
+i = 5;
+enquanto (i > 0) {
+    escreva(i);
+    i = i - 1;
+}
